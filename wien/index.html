@@ -93,7 +93,7 @@
             zoom: 12
         });
 		
-		map.locate({setView: true, maxZoom: 16});
+		
 		function onLocationFound(e) {
     var radius = e.accuracy / 1;
 
@@ -240,6 +240,7 @@ map.on('locationfound', onLocationFound);
         // TODO: Ausschnitt auf Stationen des Stadtpaziergangs setzen
      var rahmen = (punkteSpaziergang.getBounds());
         map.fitBounds(rahmen);
+		map.locate({setView: true, maxZoom: 16});
     </script>
 
 </body>
