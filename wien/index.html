@@ -159,7 +159,7 @@
 			onEachFeature: function (feature, layer) {
 			var tippBike = '<h2>' + feature.properties.STATION + '</h2>';"<br>" ;
 			tippBike += feature.properties.BEZIRK ;
-			layer.bindPopup(tippBike);
+			layer.bindTooltip(tippBike);
 			}
         
         }).addTo(marker_group)
