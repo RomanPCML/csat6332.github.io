@@ -83,6 +83,22 @@
         // leaflet-hash aktivieren
         var hash = new L.Hash(map);
 		L.geoJSON(window.etappe08).addTo(map);
+		
+		var huts = [
+		L.marker([47.44167, 11.76295], {titel: "Erfurter Hütte", icon: L.icon({ iconUrl:"icons/hut.png"}) }),
+		L.marker([47.44113, 11.76400], {titel: "Berggasthof Rofan", icon: L.icon({ iconUrl:"icons/hut.png"}) }),
+		L.marker([47.44377,11.76421], {titel: "Mauritzalm", icon: L.icon({ iconUrl:"icons/hut.png"}) }),
+		L.marker([47.42651,11.64792], {titel: "Falzthurnalm", icon: L.icon({ iconUrl:"icons/hut.png"}) }),
+		L.marker([47.46829,11.77596], {titel: "Sennhütte ", icon: L.icon({ iconUrl:"icons/hut.png"}) }),
+		L.marker([47.40287,11.61697], {titel: "Gramaialm", icon: L.icon({ iconUrl:"icons/hut.png"}) }),
+		L.marker([47.38005,11.60356], {titel: "Lamsenjochhütte", icon: L.icon({ iconUrl:"icons/hut.png"}) })
+		];
+		
+		var hutslayer = L.featureGroup();
+		for (var i=0; i<huts.length; i++) {
+			hutslayer.addLayer(huts[i]);
+		}
+		hutslayer.addTo(map);
 
     </script>
 
