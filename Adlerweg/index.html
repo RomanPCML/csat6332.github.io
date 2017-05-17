@@ -98,7 +98,14 @@
 		for (var i=0; i<huts.length; i++) {
 			hutslayer.addLayer(huts[i]);
 		}
-		hutslayer.addTo(map);
+		//hutslayer.addTo(map);
+		map.on("zoomend", function() {
+		if (map.getZoom() >= 15 ) {
+			map.addLayer(hutslayer);
+		}
+		else {
+		map.removeLayer(hutslayer);
+		}});
 
     </script>
 
