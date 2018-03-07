@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Mama Tierra</title>
+
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/stylesheet-mama.css" />
+    <link href='http://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/MarkerCluster.css" />
+
+
+    <script src="js/leaflet/leaflet.js"></script>
+	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+    <script src="js/leaflet-hash/leaflet-hash.js"></script>
+    <script src="js/script-projekt.js"></script>
+    <script src="js/leaflet.markercluster.js"></script>
+    <script src="js/leaflet/leaflet.ajax.min.js"></script>
+
+	
+	
+
+</head>
+    
+<body>
+    
+    <a id="start" href= #header>Start</a>
+    <a id="main" href= #boxborder>Main</a>
+    <a id="footprint" href= #mapborder>CO<sub>2</sub></a>
+    <div id="header">
+        <h1 id="headline1" > Mama Tierra </h1>
+        <h4> Every day is Mother's Day</h4>
+    </div>
+    
+    <a href= #boxborder><img class=arrow src="images/scroll-down-arrow.png" /></a>
+    
+    <div id="boxborder">
+            <div class="box">
+                <h3>Life</h3>
+                <p>
+                Living a sustainable Lifestyle sounds like a lot of efford, since you have to watch out for every step you take to be "green". But you're in luck! Once you know how easy it can be to reduce your personal impact on the environment you don't even have to think about it anymore! Here you can find a few really simple ways to improve your everyday life which inclue: 
+                <br>
+                  - <a style="text-decoration: none" href="https://wastesheet"= >Reducing waste</a><br>
+                  - <a style="text-decoration: none" href="https://energysheet"= >Reducing energy consumption</a><br>
+                  - <a  href="https://co2sheet" style="text-decoration: none">Reducing CO<sub>2</sub></a><br>
+                <br>
+                <a target="_blank" href="https://mosheet"><img src="images/arrow_details.png" class="icon2"></a>
+                <br>
+            
+            </div>
+            <div class="box2">
+                <h3>Travel</h3>
+                <p>
+                Travelling is fun and probably the best time of the year for any of us. It means taking your mind of things and enjoying life to its fullest. And that's exactly what it should be! But unfortunately for most of us travelling accounts for the biggest share in our ecological footprint. So here's how you can enjoy your holiday but still keep Mama Earth happy while doing so! 
+                <br>
+                <a target="_blank" href="https://mosheet"><img src="images/arrow_details.png" class="icon2"></a>
+                    <br>
+                </p>
+            </div>
+            <div class="box">
+                <h3>Stuff</h3>
+                <p>
+                Buying new clothes and stuff always makes you happy and getting a good deal on it even more so. But let's not fool ourselfs. A shirt sold at 3€, produced 15.000 km far away, can't come with a good concious. So here you can find some ways in which you can get even happier with your new shoes, knowing workers are payed properly and Mama Earth is enjoying them as well!
+                <a target="_blank" href="https://josheet"><img src="images/arrow_details.png" class="icon2"></a>
+                    <br>
+                </p>        
+            </div>
+    </div>
+    
+    
+    <a href= #jump><img class=arrow src="images/scroll-down-arrow.png" /></a>
+    
+    <h2 id="jump">World wide Carbon emissions per Person</h2>
+    <div id="text">
+    Calculate your personal Carbon Footprint and compare it to countries all over the Planet!
+    <a target ="_blank" href="http://www.footprintcalculator.org/">To Calculator!</a>
+    </div>
+    <div id="mapborder">
+        <div id="map"> </div>
+    </div>
+    
+    <div id="footer">
+        <p> Created by: <a href="https://github.com/csat6332">Roman Schmidt</a></p>  
+        <p> Data Source: <a href="https://data.worldbank.org/indicator/EN.ATM.CO2E.PC">World Bank 2014</a></p>
+        <p> Background: <a href="https://www.freepik.com/free-vector/polygonal-earth_795839.htm">Designed by Freepik</a></p>
+    </div>
+     
+    
+    
+    
+    
+    
+ <script>
+//Kartenlayer definieren
+        var layer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                subdomains: ['a', 'b', 'c'],
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            })
+
+            // Karte definieren und Ausschnitt setzen
+        var map = L.map('map', {
+                layers: [layer],
+                center: [40.463667,-3.74922],
+                zoom: 2
+            }); 
+             
+             
+        L.control.scale({
+            maxWidth: 200,
+            metric: true,
+            imperial: false
+            }).addTo(map);
+     
+     
+     var listeco2 = [
+["Burundi",0.044485,-3.373056,29.918886,1],
+["Somalia",0.045047,5.152149,46.199616,1],
+["Chad",0.053778,15.454166,18.732207,1],
+["Central African Republic",0.066593,6.611111,20.939444,1],
+["Rwanda",0.074016,-1.940278,29.873888,1],
+["Malawi",0.074763,-13.254308,34.301525,1],
+["Mali",0.083229,17.570692,-3.996166,1],
+["Niger",0.111074,17.607789,8.81666,1],
+["Madagascar",0.130421,-18.766947,46.869107,1],
+["Uganda",0.134656,1.373333,32.290275,1],
+["Guinea-Bissau",0.157241,11.803749,-15.180413,1],
+["Burkina Faso",0.162019,12.238333,-1.561593,1],
+["Sierra Leone",0.184926,8.460555,-11.779889,1],
+["Comoros",0.202814,-11.875001,43.872219,1],
+["Guinea",0.207493,9.945587,-9.696645,1],
+["Liberia",0.212968,6.428055,-9.429499,1],
+["Tanzania",0.221347,-6.369028,34.888822,1],
+["Haiti",0.270539,18.971187,-72.285215,1],
+["Nepal",0.283539,28.394857,84.124008,1],
+["Zambia",0.288271,-13.133897,27.849332,1],
+["Afghanistan",0.299445,33.93911,67.709953,1],
+["Mozambique",0.309667,-18.665695,35.529562,1],
+["Kenya",0.310415,0.23559,37.906193,1],
+["Cameroon",0.314928,7.369722,12.354722,1],
+["Solomon Islands",0.350449,-9.64571,160.156194,1],
+["Togo",0.362697,8.619543,0.824782,1],
+["Timor-Leste",0.387014,-8.874217,125.727539,1],
+["Cambodia",0.437760,12.565679,104.990963,1],
+["Bangladesh",0.459142,23.684994,90.356331,1],
+["Ghana",0.536533,7.946527,-1.23194,1],
+["Nigeria",0.545622,9.81999,8.675277,1],
+["Kiribati",0.564368,-3.370417,-168.734039,1],
+["Vanuatu",0.594993,-15.376706,166.959158,1],
+["Senegal",0.608809,14.497401,-14.452362,1],
+["Benin",0.614214,9.30769,2.315834,1],
+["Tajikistan",0.620467,38.861034,71.276093,1],
+["Mauritania",0.666822,21.789,-10.940835,1],
+["Zimbabwe",0.779956,-19.15438,29.154857,1],
+["Djibouti",0.791962,11.825138,42.590275,1],
+["Nicaragua",0.808521,12.865416,-85.207229,1],
+["Papua New Guinea",0.814649,-6.314993,143.95555,1],
+["Paraguay",0.870219,-23.442503,-58.443832,1],
+["Sri Lanka",0.891876,7.873054,80.771797,1],
+["Pakistan",0.896264,30.375321,69.345116,1],
+["Swaziland",0.928715,-26.522503,31.465866,1],
+["El Salvador",1.000645,13.794185,-88.89653,1],
+["Tuvalu",1.008526,-7.109535,177.64933,1],
+["Samoa",1.029788,-13.759029,-172.104629,1],
+["Philippines",1.055457,12.879721,121.774017,1],
+["Honduras",1.075222,15.199999,-86.241905,1],
+["Tonga",1.143966,-21.178986,-175.198242,1],
+["Lesotho",1.150111,-29.609988,28.233608,1],
+["Guatemala",1.150978,15.783471,-90.230759,1],
+["Bhutan",1.289321,27.514162,90.433601,1],
+["Angola",1.291328,-11.202692,17.873887,1],
+["Fiji",1.320575,-16.578193,179.414413,1],
+["Moldova",1.386829,47.411631,28.369885,1],
+["Belize",1.407601,17.189877,-88.49765,1],
+["Namibia",1.583729,-22.95764,18.49041,1],
+["Costa Rica",1.630951,9.748917,-83.753428,1],
+["India",1.730000,20.593684,78.96288,1],
+["Morocco",1.744380,31.791702,-7.9262,1],
+["Colombia",1.759537,4.570868,-74.297333,1],
+["Vietnam",1.803566,14.58324,108.277199,1],
+["Indonesia",1.819363,0.789275,113.921327,1],
+["Dominica",1.864286,15.414999,-61.370976,1],
+["Armenia",1.902759,40.69099,45.38189,1],
+["Bolivia",1.932419,-16.290154,-63.588653,1],
+["Marshall Islands",1.941019,7.131474,171.184478,1],
+["Uruguay",1.973151,-32.522779,-55.765835,1],
+["Albania",1.978763,41.153332,20.168331,1],
+["Peru",1.993486,-9.189967,-75.15152,1],
+["Dominican Republic",2.069987,18.735693,-70.162651,1],
+["Panama",2.254311,8.537981,-80.782127,1],
+["Grenada",2.275498,12.262776,-61.604171,1],
+["Georgia",2.411542,42.315407,43.356892,1],
+["Tunisia",2.587060,33.886917,9.537499,1],
+["Jamaica",2.593215,18.109581,-77.297508,1],
+["Brazil",2.594388,-14.235004,-51.92528,1],
+["Guyana",2.632348,4.860416,-58.93018,1],
+["Ecuador",2.761702,-1.831239,-78.183406,1],
+["Gabon",2.768266,0.803689,11.609444,1],
+["French Polynesia",2.915135,-17.679742,-149.406843,1],
+["Jordan",3.002515,30.585164,36.238414,1],
+["Cuba",3.045211,21.521757,-77.781167,1],
+["Botswana",3.243288,-22.328474,24.684866,1],
+["Maldives",3.269560,3.202778,73.22068,1],
+["Mauritius",3.353110,-20.348404,57.552152,1],
+["Uzbekistan",3.420723,41.377491,64.585262,1],
+["Latvia",3.498193,56.879635,24.603189,1],
+["Romania",3.516154,45.943161,24.96676,1],
+["Montenegro",3.556072,42.708678,19.37439,1],
+["Suriname",3.634019,3.919305,-56.27783,1],
+["Algeria",3.717410,28.33886,1.659626,1],
+["Mexico",3.866241,23.634501,-102.552784,1],
+["Azerbaijan",3.931561,40.143105,47.576927,1],
+["Croatia",3.973805,45.1,15.2,1],
+["Nauru",4.021851,0.522778,166.931503,1],
+["Hungary",4.265575,47.162494,19.503304,1],
+["Lebanon",4.295733,33.854721,35.862285,1],
+["Switzerland",4.311563,46.818188,8.227512,1],
+["Portugal",4.331554,39.399872,-8.224454,1],
+["Lithuania",4.378090,55.169438,23.881275,1],
+["Sweden",4.478182,60.128161,18.643501,1],
+["Barbados",4.490178,13.193887,-59.543198,1],
+["Turkey",4.491479,38.963745,35.243322,1],
+["France",4.572088,46.227638,2.213749,1],
+["Thailand",4.621860,15.870032,100.992541,1],
+["Chile",4.687377,-35.675147,-71.542969,1],
+["Equatorial Guinea",4.733817,1.650801,10.267895,1],
+["Argentina",4.746797,-38.416097,-63.616672,1],
+["Iraq",4.811840,33.223191,43.679291,1],
+["Ukraine",5.020747,48.379433,31.16558,2],
+["Spain",5.033824,40.463667,-3.74922,2],
+["Cyprus",5.260352,35.126413,33.429859,2],
+["Italy",5.270867,41.87194,12.56738,2],
+["Serbia",5.282522,44.16521,21.5859,2],
+["Antigua and Barbuda",5.377649,17.60816,-61.796428,2],
+["Seychelles",5.418678,-4.679574,55.491977,2],
+["Malta",5.491525,35.937496,14.375416,2],
+["Andorra",5.832170,42.546245,1.601554,2],
+["Bulgaria",5.871616,42.733883,25.48583,2],
+["Denmark",5.935712,56.26392,9.501785,2],
+["Iceland",6.059657,64.963051,-19.20835,2],
+["British Virgin Islands",6.072834,18.420695,-64.639968,2],
+["Turks and Caicos Islands",6.086487,21.694025,-71.797928,2],
+["Greece",6.180337,39.74208,21.824312,2],
+["Slovenia",6.213687,46.151241,14.995463,2],
+["Bosnia and Herzegovina",6.234719,43.915886,17.679076,2],
+["United Kingdom",6.497440,55.378051,-3.435973,2],
+["Belarus",6.701958,53.709807,27.953389,2],
+["Austria",6.873713,47.516231,14.550072,2],
+["Mongolia",7.127326,46.862496,103.846656,2],
+["Ireland",7.378118,53.41291,-8.24389,2],
+["Poland",7.517152,51.919438,19.145136,2],
+["China",7.543908,35.86166,104.195397,2],
+["New Zealand",7.686576,-40.900557,174.885971,2],
+["Israel",7.863181,31.46051,34.851612,2],
+["Malaysia",8.032992,4.210484,101.975766,2],
+["Belgium",8.328160,50.503887,4.469936,2],
+["Aruba",8.408363,12.52111,-69.968338,2],
+["Finland",8.660721,61.92411,25.748151,2],
+["Bermuda",8.838315,32.321384,-64.75737,2],
+["Germany",8.889370,51.165691,10.451526,2],
+["South Africa",8.980119,-30.559482,22.937506,2],
+["Greenland",8.989182,71.706936,-42.604303,2],
+["Czech Republic",9.165978,49.817492,15.472962,2],
+["Cayman Islands",9.171838,19.513469,-80.566956,2],
+["Libya",9.186845,26.3351,17.228331,2],
+["Norway",9.270945,60.472024,8.468946,2],
+["Japan",9.538706,36.204824,138.252924,2],
+["Netherlands",9.920138,52.132633,5.291266,2],
+["Singapore",10.306332,1.352083,103.819836,3],
+["Faroe Islands",12.237849,61.892635,-6.911806,3],
+["Palau",12.342704,7.51498,134.58252,3],
+["Turkmenistan",12.517295,38.969719,59.556278,3],
+["Kazakhstan",14.362390,48.19573,66.923684,3],
+["Estonia",14.848819,58.595272,25.13607,3],
+["Canada",15.117159,56.130366,-106.346771,4],
+["Australia",15.370138,-25.274398,133.775136,4],
+["Oman",15.443167,21.512583,55.923255,4],
+["Gibraltar",15.513485,36.137741,-5.345374,4],
+["New Caledonia",16.008918,-20.904305,165.618042,4],
+["United States","16.493666",37.9024,-95.712891,4],
+["Luxembourg",17.362121,49.815273,6.129583,4],
+["Saudi Arabia",19.529272,23.885942,45.79162,4],
+["United Arab Emirates",23.302023,23.424076,53.847818,5],
+["Bahrain",23.449755,25.930414,50.637772,5],
+["Kuwait",25.223864,29.31166,47.481766,6],
+["Trinidad and Tobago",34.163243,10.691803,-61.222503,6],
+["Qatar",45.423240,25.354826,51.183884,6],
+    ]
+
+var iconByCategory = {
+            1: "http://www.clker.com/cliparts/Z/M/2/H/6/k/light-green-dot.svg.hi.png",
+            2: "http://www.clker.com/cliparts/R/d/z/v/H/1/neon-green-dot-hi.png",
+            3: "http://www.clker.com/cliparts/0/s/x/E/O/d/yellow-dot-md.png",
+            4: "http://www.clker.com/cliparts/m/I/n/1/T/P/orange-dot-md.png",
+            5: "http://www.clker.com/cliparts/T/G/b/7/r/A/red-dot-md.png",
+            6: "http://www.clipartsuggest.com/images/338/purple-dot-clip-art-at-clker-com-vector-clip-art-online-royalty-YmCT2i-clipart.png"
+        };
+     
+     for (var i = 0; i < listeco2.length; i++) {
+			marker = new L.marker([listeco2[i][2],listeco2[i][3]],{
+                    icon: L.icon({
+                        iconSize: [12, 12],
+                        iconAnchor: [0, 0],
+                        popupAnchor: [0, 0],
+                        shadowSize: [15, 15],
+                        shadowUrl: 'https://unpkg.com/leaflet@1.0.3/dist/images/marker-shadow.png',
+                        iconUrl: iconByCategory[listeco2[i][4]]
+                    })
+                })
+				//.bindPopup(listeco2[i][0])
+				.addTo(map);
+         
+         var markup = listeco2[i][0]
+            markup += " Emissions: "
+            markup+= listeco2[i][1]
+            markup += " tons per person per year"
+                
+            marker.bindPopup(markup)
+		}
+
+
+</script>
+        
+    
+</body>
+
+</html>
