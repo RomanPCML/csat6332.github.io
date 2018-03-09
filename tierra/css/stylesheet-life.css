@@ -189,7 +189,7 @@ body {
 h2 {
     color: white;
     font: 2em 'Lobster Two', Helvetica, sans-serif;
-    margin-left: 2em;
+    margin-left: 2.5em;
 }
 
 h3 {
@@ -239,9 +239,6 @@ h4 {
     padding: 10% 10% 10% 10%;
     margin-top: 10%;
 
-}
-#jump {
-    margin-top: 5em;
 }
 
 #container {
