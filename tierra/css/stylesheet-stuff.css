@@ -9,24 +9,18 @@ body {
 
 
 #header {
-    height: 25%;
     border: 1px solid white;
+    line-height:6em;
+    vertical-align: middle;
     
 }
 #headline1 {
     color: white;
-    font: 5em 'Lobster Two', Helvetica, sans-serif;
+    font: 3em 'Lobster Two', Helvetica, sans-serif;
     text-align:center;
-    margin-top: 0.5em;
-    margin-bottom: 0.2em;
 }
 
-#map {
-    width: 95%;
-    height: 100%;
-    margin: 0% auto 2% 5%;
-    
-    }  
+ 
 
 .box {
     width: 30%;
@@ -42,40 +36,61 @@ body {
     padding:1%;
 }
 
-.box2 {
-    width: 30%;
-    height: 100%;
-    display: table-cell;
-    border: 1px solid white;
-    margin: 2% 0.25% 2% 0.25%;
-    color: black;
-    text-align:justify;
-    font-family: serif;
+.article {
+    float: left;
+    width: 27%;
+    padding: 10px;
+    text-align:center;
+    font-family:serif;
     background-color: rgba(255, 255, 255, 0.4);
     border-radius:6%;
     padding:1%;
-}
-
-
-#boxborder {
-    height: auto;
-    margin:auto;
-    display: table-row;
-    
+    margin-left: 3%;
+    margin-top: 3%;
     
 }
 
-#mapborder {
-    height:500px;
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.placeholder {
+    height: 70%;
+    width: 100%;
     margin: auto;
-    border: 1px transparent white;
     
 }
 
-#socialborder {
-    height:500px;
-    margin: auto;
-    border: 1px transparent white;
+.artitle {
+    color: black;
+    font: serif;
+}
+
+.menu {
+    height: 10%;
+    border: 1px solid white;    
+}
+
+.menucell {
+    float: left;
+    width: 23%;
+    height: 3em;
+    margin-left:1%;
+    line-height: 2em;
+    vertical-align:middle;
+    text-align: center;
+    text-decoration: none;
+    color: white; 
+    border: 1px white solid;
+    border-radius: 5%
+}
+
+.menulink {
+    color: white;
+    text-decoration: none;
+    font: 2em 'Lobster Two', Helvetica, sans-serif;;
     
 }
 
@@ -213,33 +228,6 @@ h4 {
     line-height: 100%;
 }
 
-#halfbox1 {
-    width: calc(100% - 400px);
-    height: 45%;
-    border: 5px solid white;
-    color: black;
-    text-align:center;
-    vertical-align: center;
-    font-family:serif;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 10% 10% 10% 10%;
-    margin-right:5%;
-    margin-top:10%;
-}
-
-#halfbox2 {
-    width: calc(100% - 400px);
-    height: 45%;
-    border: 5px solid white;
-    color: black;
-    text-align:center;
-    vertical-align: center;
-    font-family:serif;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 10% 10% 10% 10%;
-    margin-top: 10%;
-
-}
 
 #container {
     display:flex;
